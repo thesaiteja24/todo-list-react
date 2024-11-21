@@ -1,4 +1,4 @@
-import React, { useDebugValue } from "react";
+import React from "react";
 import ViewButtons from "./ViewButtons";
 import TaskCard from "./TaskCard";
 import Data from "./Data";
@@ -28,18 +28,43 @@ export default function Main() {
       date: "17-11-24",
     },
   ]);
-  const [dataTitle, setDataTitle] = useState("");
-  const [dataDesc, setDataDesc] = useState("");
+
+  const [selectedTodo, setSelectedTodo] = useState(null);
+  const [isEditing, setIsEditing] = useState(false); // Toggles edit card
 
   function handleEdit(index) {
-    todos[index];
+    // Passing task and its index
+    setSelectedTodo({ ...todos[index], index });
+    setIsEditing(true);
+  }
+
+  function handleSave(task) {
+    if (task.index !== undefined) {
+      // Updating existing todo
+      const updatedTodos = [...todos];
+      updatedTodos[task.index] = { ...task };
+      delete updatedTodos[task.index].index;
+      setTodos(updatedTodos);
+    } else {
+      // Adding new todo
+      setTodos([...todos, { ...task, _id: uuidv4() }]);
+    }
+    setIsEditing(false);
+    setSelectedTodo(null);
   }
 
   return (
     <div className="main border-black border-2 min-h-full rounded-lg">
       <ViewButtons />
-      <TaskCard todos={todos} />
-      <Data title={dataTitle} desc={dataDesc}/>
+      {isEditing ? (
+        <Data
+          todo={selectedTodo}
+          handleSave={handleSave}
+          handleCancel={() => setIsEditing(false)}
+        />
+      ) : (
+        <TaskCard todos={todos} handleEdit={handleEdit} />
+      )}
     </div>
   );
 }

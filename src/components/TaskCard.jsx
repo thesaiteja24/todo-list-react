@@ -14,13 +14,7 @@ export default function TaskCard({ todos, handleEdit }) {
         <div>
           <button
             type="button"
-            class="text-white bg-red-700 hover:bg-red-800 font-medium rounded-full text-sm px-5 py-1 text-center me-2 mb-1 mt-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-          >
-            Delete
-          </button>
-          <button
-            type="button"
-            class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-sm px-5 py-1 text-center me-2 mb-1 mt-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900"
+            className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-sm px-5 py-1 text-center me-2 mb-1 mt-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900"
             onClick={() => handleEdit(index)}
           >
             Edit

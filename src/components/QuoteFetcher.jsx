@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from "react";
 
 const QuotesFetcher = () => {
-  const [quote, setQuote] = useState(null);
+  // Static values for testing styles
+  const staticQuote = {
+    quote:
+      "The only limit to our realization of tomorrow is our doubts of today.",
+    author: "Franklin D. Roosevelt",
+  };
+
+  const [quote, setQuote] = useState(staticQuote);
   const [error, setError] = useState(null);
   const category = "inspirational";
   const apiKey = "YOUR_API_KEY"; // Replace with your actual API key
 
+  // Commented out API call
+  /*
   useEffect(() => {
     const fetchQuote = async () => {
       try {
@@ -21,7 +30,7 @@ const QuotesFetcher = () => {
         }
 
         const data = await response.json();
-        setQuote(data[0]); 
+        setQuote(data[0]); // Assuming the API returns an array of quotes
       } catch (err) {
         setError(err.message);
       }
@@ -29,17 +38,20 @@ const QuotesFetcher = () => {
 
     fetchQuote();
   }, [category, apiKey]);
+  */
 
   return (
-    <div>
-      <h1>Quote of the Day</h1>
+    <div className="mt-12">
+      <h1 className="text-center font-bold text-xl mb-2">Quote of the Day</h1>
       {error && <p style={{ color: "red" }}>{error}</p>}
       {quote ? (
-        <div className="">
-          <p>
-            <strong>{quote.quote}</strong>
+        <div>
+          <p className="my-8 text-center">
+            <strong className="tangerine-regular text-4xl p">
+              "{quote.quote}"
+            </strong>
           </p>
-          <p>- {quote.author}</p>
+          <p className="font-mono text-center">- {quote.author}</p>
         </div>
       ) : (
         !error && <p>Loading...</p>

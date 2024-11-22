@@ -3,9 +3,16 @@ import ViewButtons from "./ViewButtons";
 import TaskCard from "./TaskCard";
 import Data from "./Data";
 
-export default function Main({ todos, selectedTodo, isEditing, handleEdit, handleSave, setIsEditing }) {
+export default function Main({
+  todos,
+  selectedTodo,
+  isEditing,
+  handleEdit,
+  handleSave,
+  setIsEditing,
+}) {
   return (
-    <div className="main border-black border-2 min-h-full rounded-lg">
+    <div className="main border-black border-2 min-h-full rounded-lg ">
       <ViewButtons />
       {isEditing ? (
         <Data
@@ -14,7 +21,9 @@ export default function Main({ todos, selectedTodo, isEditing, handleEdit, handl
           handleCancel={() => setIsEditing(false)}
         />
       ) : (
-        <TaskCard todos={todos} handleEdit={handleEdit} />
+        <div className="flex-1 overflow-y-scroll max-h-[calc(100vh-5rem)] no-scrollbar">
+          <TaskCard todos={todos} handleEdit={handleEdit} />
+        </div>
       )}
     </div>
   );

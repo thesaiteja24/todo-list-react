@@ -12,19 +12,19 @@ function App() {
     {
       _id: uuidv4(),
       title: "Title 1",
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae sequi eos atque, quo ullam veritatis itaque corporis dicta exercitationem aspernatur laudantium, fugit iure fugiat ipsum sunt doloribus iusto, illo distinctio.Architecto quasi provident culpa ducimus eum sunt, odit dicta quis ex inventore laudantium optio vero, perspiciatis pariatur, id dignissimos! Repellendus recusandae perferendis corporis pariatur? Tempore iusto recusandae id beatae facilis.Error sed in quibusdam maiores fugiat tempora nisi molestias voluptate unde voluptatibus perspiciatis reprehenderit natus perferendis, ad excepturi voluptatum veniam neque illo similique praesentium quis! Rerum dolor magni itaque eveniet.",
+      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae sequi eos atque, quo ullam veritatis itaque corporis dicta ",
       date: "17-11-24",
     },
     {
       _id: uuidv4(),
       title: "Title 2",
-      desc: "Lorem ipsum dolor sit amet...",
+      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae sequi eos atque, quo ullam veritatis itaque corporis dicta ",
       date: "17-11-24",
     },
     {
       _id: uuidv4(),
       title: "Title 3",
-      desc: "Lorem ipsum dolor sit amet...",
+      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae sequi eos atque, quo ullam veritatis itaque corporis dicta ",
       date: "17-11-24",
     },
   ]);
@@ -56,14 +56,14 @@ function App() {
   }
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-col md:flex-row">
       <Helmet>
         <title>Todo List</title>
       </Helmet>
-      <div className="sidebar w-1/6 min-h-screen max-h-full p-2">
+      <div className="sidebar md:w-1/6 md:min-h-screen md:max-h-full p-2">
         <SideBar handleEdit={handleEdit} />
       </div>
-      <div className="main w-5/6 min-h-screen max-h-full p-2">
+      <div className="main md:w-5/6 md:min-h-screen md:max-h-full p-2">
         <Main
           todos={todos}
           isEditing={isEditing}

@@ -41,12 +41,12 @@ const QuotesFetcher = () => {
   */
 
   return (
-    <div className="mt-12">
+    <div className="md:mt-12">
       <h1 className="text-center font-bold text-xl mb-2">Quote of the Day</h1>
       {error && <p style={{ color: "red" }}>{error}</p>}
       {quote ? (
         <div>
-          <p className="my-8 text-center">
+          <p className="my-8 text-center mx-2">
             <strong className="tangerine-regular text-4xl p">
               "{quote.quote}"
             </strong>

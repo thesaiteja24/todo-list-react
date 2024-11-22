@@ -17,7 +17,7 @@ export default function Data({ todo, handleSave, handleCancel }) {
   };
 
   return (
-    <div className="border-2 border-black m-2 p-2 w-1/2 rounded-xl">
+    <div className="mx-auto my-0 border-2 border-black m-2 p-2 w-4/5 rounded-xl">
       <div className="m-2 p-2">
         <label
           htmlFor="task-title"
@@ -42,9 +42,8 @@ export default function Data({ todo, handleSave, handleCancel }) {
         </label>
         <br />
         <textarea
-        rows={10}
-        cols={30 }
-          className="border-2 border-black rounded-lg"
+          className="border-2 border-black rounded-lg w-full"
+          rows={5}
           type="text"
           id="task-desc"
           value={desc}

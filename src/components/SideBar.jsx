@@ -1,7 +1,7 @@
 import React from "react";
 import QuotesFetcher from "./QuoteFetcher";
 
-export default function SideBar({handleEdit}) {
+export default function SideBar({ handleEdit }) {
   return (
     <div className="side-bar border-black border-2 min-h-full rounded-lg">
       <div className="todo-list">
@@ -10,22 +10,22 @@ export default function SideBar({handleEdit}) {
         </h1>
       </div>
       <div className="action-buttons flex flex-col items-center p-2">
-      <button
+        <button
           type="button"
-          class="text-black-700 hover:text-white border border-black-700 hover:bg-black font-medium rounded-lg text-sm px-5 py-2 m-2 w-full text-center  "
-          onClick={() => handleEdit(undefined)}
+          className="text-black-700 hover:text-white border border-black-700 hover:bg-black font-medium rounded-lg text-sm px-5 py-2 m-2 w-full text-center"
+          onClick={() => handleEdit(undefined)} // Add new TODO
         >
           Add new TODO
         </button>
         <button
           type="button"
-          class="text-black-700 hover:text-white border border-black-700 hover:bg-black font-medium rounded-lg text-sm px-5 py-2 m-2 w-full text-center  "
+          className="text-black-700 hover:text-white border border-black-700 hover:bg-black font-medium rounded-lg text-sm px-5 py-2 m-2 w-full text-center"
         >
           Show all TODO(s)
         </button>
         <button
           type="button"
-          class="text-black-700 hover:text-white border border-black-700 hover:bg-black font-medium rounded-lg text-sm px-5 py-2 m-2 w-full text-center  "
+          className="text-black-700 hover:text-white border border-black-700 hover:bg-black font-medium rounded-lg text-sm px-5 py-2 m-2 w-full text-center"
         >
           Completed TODO(s)
         </button>

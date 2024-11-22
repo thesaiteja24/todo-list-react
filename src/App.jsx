@@ -2,32 +2,36 @@ import "./App.css";
 import SideBar from "./components/SideBar";
 import Main from "./components/Main";
 import { Helmet } from "react-helmet";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 function App() {
+  // const tempData = [
+  //   {
+  //     _id: uuidv4(),
+  //     title: "Title 1",
+  //     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae sequi eos atque, quo ullam veritatis itaque corporis dicta ",
+  //     date: "17-11-24",
+  //   },
+  //   {
+  //     _id: uuidv4(),
+  //     title: "Title 2",
+  //     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae sequi eos atque, quo ullam veritatis itaque corporis dicta ",
+  //     date: "17-11-24",
+  //   },
+  //   {
+  //     _id: uuidv4(),
+  //     title: "Title 3",
+  //     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae sequi eos atque, quo ullam veritatis itaque corporis dicta ",
+  //     date: "17-11-24",
+  //   },
+  // ];
+  // localStorage.setItem("todos", JSON.stringify(tempData));
+
+  const localSave = JSON.parse(localStorage.getItem("todos"));
   const [selectedTodo, setSelectedTodo] = useState(null);
   const [isEditing, setIsEditing] = useState(false); // Toggles edit card
-  const [todos, setTodos] = useState([
-    {
-      _id: uuidv4(),
-      title: "Title 1",
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae sequi eos atque, quo ullam veritatis itaque corporis dicta ",
-      date: "17-11-24",
-    },
-    {
-      _id: uuidv4(),
-      title: "Title 2",
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae sequi eos atque, quo ullam veritatis itaque corporis dicta ",
-      date: "17-11-24",
-    },
-    {
-      _id: uuidv4(),
-      title: "Title 3",
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae sequi eos atque, quo ullam veritatis itaque corporis dicta ",
-      date: "17-11-24",
-    },
-  ]);
+  const [todos, setTodos] = useState(localSave);
 
   function handleEdit(index) {
     if (index === undefined) {
@@ -49,10 +53,17 @@ function App() {
       setTodos(updatedTodos);
     } else {
       // Adding new TODO
-      setTodos([...todos, { ...task, _id: uuidv4() }]);
+      setTodos([...todos, { _id: uuidv4(), ...task }]);
     }
     setIsEditing(false);
     setSelectedTodo(null);
+  }
+
+  function handleDelete(index) {
+    const idToDelete = todos[index]._id; // Get the ID of the todo to delete
+    const updatedTodos = todos.filter((todo) => todo._id !== idToDelete); // Filter directly
+    setTodos(updatedTodos); // Update the state
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
   }
 
   return (
@@ -70,6 +81,7 @@ function App() {
           selectedTodo={selectedTodo}
           handleEdit={handleEdit}
           handleSave={handleSave}
+          handleDelete={handleDelete}
           setIsEditing={setIsEditing}
         />
       </div>

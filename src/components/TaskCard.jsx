@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function TaskCard({ todos, handleEdit }) {
+export default function TaskCard({ todos, handleEdit, handleDelete }) {
   return todos.map((todo, index) => (
     <div
       key={todo._id}
@@ -18,6 +18,13 @@ export default function TaskCard({ todos, handleEdit }) {
             onClick={() => handleEdit(index)}
           >
             Edit
+          </button>
+          <button
+            type="button"
+            className="text-white bg-red-700 hover:bg-red-800 font-medium rounded-full text-sm px-5 py-1 text-center me-2 mb-1 mt-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+            onClick={() => handleDelete(index)}
+          >
+            Delete
           </button>
         </div>
       </div>

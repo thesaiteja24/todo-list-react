@@ -1,5 +1,3 @@
-Here's the updated and polished README for your Todo List React project, styled similarly to the Tic Tac Toe and Calculator examples:
-
 # Todo List React
 
 A sleek and intuitive Todo List application built with **React**. This app helps users manage their tasks efficiently by categorizing them into daily, weekly, or monthly views, complemented by a motivational quote of the day.

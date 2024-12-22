@@ -2,7 +2,7 @@ import "./App.css";
 import SideBar from "./components/SideBar";
 import Main from "./components/Main";
 import { Helmet } from "react-helmet";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 function App() {
@@ -59,9 +59,8 @@ function App() {
     setSelectedTodo(null);
   }
 
-  function handleDelete(index) {
-    const idToDelete = todos[index]._id; // Get the ID of the todo to delete
-    const updatedTodos = todos.filter((todo) => todo._id !== idToDelete); // Filter directly
+  function handleDelete(id) {
+    const updatedTodos = todos.filter((todo) => todo._id !== id); // Filter directly
     setTodos(updatedTodos); // Update the state
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
   }

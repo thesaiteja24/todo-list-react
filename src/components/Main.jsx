@@ -23,7 +23,11 @@ export default function Main({
         />
       ) : (
         <div className="flex-1 overflow-y-scroll max-h-[calc(100vh-5rem)] no-scrollbar">
-          <TaskCard todos={todos} handleEdit={handleEdit} handleDelete={handleDelete}/>
+          <TaskCard
+            todos={todos}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+          />
         </div>
       )}
     </div>

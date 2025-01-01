@@ -1,11 +1,10 @@
 import "./App.css";
-// import Layout from "/components/Layout";
-// import SideBar from "./components/SideBar";
-// import Main from "./components/Main";
-// import { Helmet } from "react-helmet";
+import Layout from "./components/Layout";
+import Sidebar from "./layouts/Sidebar";
+import MainContent from "./layouts/MainContent";
+import { Helmet } from "react-helmet";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import QuoteCard from "./components/quotes/QuoteCard";
 
 function App() {
   const tempData = [
@@ -67,26 +66,25 @@ function App() {
   }
 
   return (
-    // <Layout>
-    //   <Helmet>
-    //     <title>Todo List</title>
-    //   </Helmet>
-    //   <div className="sidebar md:w-1/6 md:min-h-screen md:max-h-full p-2">
-    //     <SideBar handleEdit={handleEdit} />
-    //   </div>
-    //   <div className="main md:w-5/6 md:min-h-screen md:max-h-full p-2">
-    //     <Main
-    //       todos={todos}
-    //       isEditing={isEditing}
-    //       selectedTodo={selectedTodo}
-    //       handleEdit={handleEdit}
-    //       handleSave={handleSave}
-    //       handleDelete={handleDelete}
-    //       setIsEditing={setIsEditing}
-    //     />
-    //   </div>
-    // </Layout>
-    <QuoteCard />
+    <Layout>
+      <Helmet>
+        <title>Todo List</title>
+      </Helmet>
+      <div className="sidebar md:w-1/6 md:min-h-screen md:max-h-full p-2">
+        <Sidebar handleEdit={handleEdit} />
+      </div>
+      <div className="main md:w-5/6 md:min-h-screen md:max-h-full p-2">
+        <MainContent
+          todos={todos}
+          isEditing={isEditing}
+          selectedTodo={selectedTodo}
+          handleEdit={handleEdit}
+          handleSave={handleSave}
+          handleDelete={handleDelete}
+          setIsEditing={setIsEditing}
+        />
+      </div>
+    </Layout>
   );
 }
 

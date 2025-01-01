@@ -4,18 +4,26 @@ import { useState } from "react";
 export default function Data({ todo, handleSave, handleCancel }) {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
+  const [date, setDate] = useState("");
 
   useEffect(() => {
     if (todo) {
       setTitle(todo.title || "");
       setDesc(todo.desc || "");
+      setDate(todo.date || "");
     }
   }, [todo]);
 
   const saveTodo = () => {
-    handleSave({ ...todo, title, desc });
+    if (!todo || !todo.date) {
+      // New todo or no existing date
+      const currentDate = new Date().toLocaleDateString("en-GB");
+      handleSave({ ...todo, title, desc, date: currentDate });
+    } else {
+      // Existing todo with date - keep the original date
+      handleSave({ ...todo, title, desc, date: todo.date });
+    }
   };
-
   return (
     <div className="mx-auto my-0 border-2 border-black m-2 p-2 w-4/5 rounded-xl">
       <div className="m-2 p-2">

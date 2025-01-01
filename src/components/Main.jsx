@@ -14,7 +14,7 @@ export default function Main({
 }) {
   return (
     <div className="main border-black border-2 min-h-full rounded-lg ">
-      <ViewButtons />
+      {/* <ViewButtons /> */}
       {isEditing ? (
         <Data
           todo={selectedTodo}

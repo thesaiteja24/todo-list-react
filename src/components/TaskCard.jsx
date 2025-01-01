@@ -16,7 +16,7 @@ export default function TaskCard({ todos = [], handleEdit, handleDelete }) {
           <h6>{todo.desc}</h6>
 
           <div className="buttons flex flex-row justify-between">
-            <h6 className="date m-1 font-semibold">{todo.date}</h6>
+            <h6 className="date m-1 font-semibold">Created At: {todo.date}</h6>
             <div>
               <button
                 type="button"

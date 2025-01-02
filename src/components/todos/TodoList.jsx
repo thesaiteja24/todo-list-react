@@ -4,9 +4,9 @@ import { useTodo } from "../../context/TodoContext";
 
 export default function TodoList({ handleEdit, handleDelete }) {
   const { todos } = useTodo();
-  
+
   if (!Array.isArray(todos) || todos.length === 0) {
-    return <div>No tasks available</div>;
+    return <div className="m-1 p-1 text-center">No tasks available</div>;
   }
 
   return (

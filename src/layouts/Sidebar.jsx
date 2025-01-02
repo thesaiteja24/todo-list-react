@@ -14,7 +14,7 @@ export default function Sidebar() {
             TODO List
           </h1>
         </div>
-        <div className="action-buttons flex flex-row md:flex-col items-center p-2">
+        <div className="action-buttons flex flex-col sm:flex-row md:flex-col items-center p-2">
           <button
             type="button"
             className="text-black-700 hover:text-white border border-black-700 hover:bg-black font-medium rounded-lg text-sm px-2 py-2 m-2 w-full text-center"

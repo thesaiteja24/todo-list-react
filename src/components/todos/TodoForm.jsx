@@ -25,7 +25,7 @@ export default function Data({ todo, handleSave, handleCancel }) {
     }
   };
   return (
-    <div className="mx-auto my-0 border-2 border-black m-2 p-2 w-4/5 rounded-xl">
+    <div className="mx-auto my-4 border-2 border-black p-2 w-11/12 rounded-xl">
       <div className="m-2 p-2">
         <label
           htmlFor="task-title"

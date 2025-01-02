@@ -1,7 +1,11 @@
+// src/layouts/Sidebar.jsx
 import React from "react";
 import QuoteCard from "../components/quotes/QuoteCard";
+import { useTodo } from "../context/TodoContext";
 
-export default function Sidebar({ handleEdit }) {
+export default function Sidebar() {
+  const { handleEdit } = useTodo();
+
   return (
     <div className="sidebar md:w-1/6 md:min-h-screen md:max-h-full p-2">
       <div className="side-bar border-black border-2 min-h-full rounded-lg">
@@ -14,7 +18,7 @@ export default function Sidebar({ handleEdit }) {
           <button
             type="button"
             className="text-black-700 hover:text-white border border-black-700 hover:bg-black font-medium rounded-lg text-sm px-2 py-2 m-2 w-full text-center"
-            onClick={() => handleEdit(undefined)} // Add new TODO
+            onClick={() => handleEdit(undefined)}
           >
             Add new TODO
           </button>

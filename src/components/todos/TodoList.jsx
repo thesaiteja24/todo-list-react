@@ -1,7 +1,10 @@
 import React from "react";
 import TodoItem from "./TodoItem";
+import { useTodo } from "../../context/TodoContext";
 
-export default function TodoList({ todos = [], handleEdit, handleDelete }) {
+export default function TodoList({ handleEdit, handleDelete }) {
+  const { todos } = useTodo();
+  
   if (!Array.isArray(todos) || todos.length === 0) {
     return <div>No tasks available</div>;
   }

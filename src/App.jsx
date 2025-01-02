@@ -1,24 +1,21 @@
-import "./App.css";
-import Layout from "./components/Layout";
+// src/App.jsx
+import React from "react";
+import { Helmet } from "react-helmet";
 import Sidebar from "./layouts/Sidebar";
 import MainContent from "./layouts/MainContent";
-import { Helmet } from "react-helmet";
-import { useState } from "react";
+import { TodoProvider } from "./context/TodoContext";
 
 function App() {
-  const localSave = JSON.parse(localStorage.getItem("todos"));
-  const [todos, setTodos] = useState(localSave);
-
   return (
-    <>
-      <Helmet>
-        <title>Todo List</title>
-      </Helmet>
-      <Layout>
+    <TodoProvider>
+      <div className="flex flex-col md:flex-row">
+        <Helmet>
+          <title>Todo List</title>
+        </Helmet>
         <Sidebar />
-        <MainContent todos={todos} setTodos={setTodos} />
-      </Layout>
-    </>
+        <MainContent />
+      </div>
+    </TodoProvider>
   );
 }
 

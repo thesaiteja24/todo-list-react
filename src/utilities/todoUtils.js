@@ -21,7 +21,7 @@ const tempData = [
   },
 ];
 
-localStorage.setItem("todos", JSON.stringify(tempData));
+// localStorage.setItem("todos", JSON.stringify(tempData));
 
 // Function to edit a TODO
 export function editTodo(todos, index) {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import DailyQuote from "../../services/quoteService";
+import DailyQuote from "../../utilities/quoteUtils";
 
 const QuoteCard = () => {
   const [quote, setQuote] = useState(null);

@@ -4,7 +4,7 @@ import QuoteCard from "../components/quotes/QuoteCard";
 import { useTodo } from "../context/TodoContext";
 
 export default function Sidebar() {
-  const { handleEdit } = useTodo();
+  const { handleEdit, viewComplete, viewPending } = useTodo();
 
   return (
     <div className="sidebar md:w-1/6 md:min-h-screen md:max-h-full p-2">
@@ -25,12 +25,14 @@ export default function Sidebar() {
           <button
             type="button"
             className="text-black-700 hover:text-white border border-black-700 hover:bg-black font-medium rounded-lg text-sm px-2 py-2 m-2 w-full text-center"
+            onClick={viewPending}
           >
-            Show all TODO(s)
+            Pendinga TODO(s)
           </button>
           <button
             type="button"
             className="text-black-700 hover:text-white border border-black-700 hover:bg-black font-medium rounded-lg text-sm px-2 py-2 m-2 w-full text-center"
+            onClick={ viewComplete}
           >
             Completed TODO(s)
           </button>

@@ -1,6 +1,12 @@
 import React from "react";
 
-export default function TodoItem({ todo, index, handleEdit, handleDelete }) {
+export default function TodoItem({
+  todo,
+  index,
+  handleEdit,
+  handleDelete,
+  handleComplete,
+}) {
   return (
     <div
       key={todo._id}
@@ -12,13 +18,29 @@ export default function TodoItem({ todo, index, handleEdit, handleDelete }) {
       <div className="buttons flex flex-row justify-between">
         <h6 className="date m-1 font-semibold">Created At: {todo.date}</h6>
         <div>
-          <button
-            type="button"
-            className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-sm px-5 py-1 text-center me-2 mb-1 mt-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900"
-            onClick={() => handleEdit(index)}
-          >
-            Edit
-          </button>
+          {todo.markAsDone ? (
+            <span></span>
+          ) : (
+            <button
+              type="button"
+              className="text-white bg-yellow-700 hover:bg-yellow-800 font-medium rounded-full text-sm px-5 py-1 text-center me-2 mb-1 mt-1 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-900"
+              onClick={() => handleComplete(todo._id)}
+            >
+              Mark As Done
+            </button>
+          )}
+
+          {todo.markAsDone ? (
+            <span></span>
+          ) : (
+            <button
+              type="button"
+              className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-sm px-5 py-1 text-center me-2 mb-1 mt-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900"
+              onClick={() => handleEdit(index)}
+            >
+              Edit
+            </button>
+          )}
           <button
             type="button"
             className="text-white bg-red-700 hover:bg-red-800 font-medium rounded-full text-sm px-5 py-1 text-center me-2 mb-1 mt-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"

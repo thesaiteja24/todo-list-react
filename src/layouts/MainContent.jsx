@@ -12,6 +12,7 @@ export default function MainContent() {
     handleSave,
     handleDelete,
     setIsEditing,
+    handleComplete,
   } = useTodo();
 
   return (
@@ -25,7 +26,7 @@ export default function MainContent() {
           />
         ) : (
           <div className="flex-1 overflow-y-scroll max-h-[calc(100vh-5rem)] no-scrollbar">
-            <TodoList handleEdit={handleEdit} handleDelete={handleDelete} />
+            <TodoList handleEdit={handleEdit} handleDelete={handleDelete} handleComplete={handleComplete}/>
           </div>
         )}
       </div>

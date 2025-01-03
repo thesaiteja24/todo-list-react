@@ -1,6 +1,11 @@
 // src/context/TodoContext.jsx
 import { createContext, useContext, useState, useEffect } from "react";
-import { editTodo, saveTodo, deleteTodo } from "../utilities/todoUtils";
+import {
+  editTodo,
+  saveTodo,
+  deleteTodo,
+  markAsDone,
+} from "../utilities/todoUtils";
 
 const TodoContext = createContext();
 
@@ -8,6 +13,7 @@ export function TodoProvider({ children }) {
   const [todos, setTodos] = useState([]);
   const [selectedTodo, setSelectedTodo] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [displayComplete, setDisplayComplete] = useState(false);
 
   useEffect(() => {
     // Load todos from localStorage on mount
@@ -37,6 +43,19 @@ export function TodoProvider({ children }) {
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
   };
 
+  const handleComplete = (id) => {
+    const updatedTodos = markAsDone(todos, id);
+    setTodos(updatedTodos);
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+  };
+  const viewComplete = () => {
+    setDisplayComplete(true);
+  };
+
+  const viewPending = () => {
+    setDisplayComplete(false);
+  };
+
   const value = {
     todos,
     selectedTodo,
@@ -45,6 +64,10 @@ export function TodoProvider({ children }) {
     handleSave,
     handleDelete,
     setIsEditing,
+    handleComplete,
+    viewComplete,
+    viewPending,
+    displayComplete
   };
 
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;

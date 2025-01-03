@@ -6,18 +6,21 @@ const tempData = [
     title: "Title 1",
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae sequi eos atque, quo ullam veritatis itaque corporis dicta ",
     date: "17-11-24",
+    markAsDone: false,
   },
   {
     _id: uuidv4(),
     title: "Title 2",
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae sequi eos atque, quo ullam veritatis itaque corporis dicta ",
     date: "17-11-24",
+    markAsDone: false,
   },
   {
     _id: uuidv4(),
     title: "Title 3",
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae sequi eos atque, quo ullam veritatis itaque corporis dicta ",
     date: "17-11-24",
+    markAsDone: false,
   },
 ];
 
@@ -41,10 +44,16 @@ export function saveTodo(todos, task) {
     return updatedTodos;
   }
   // Adding new TODO
-  return [...todos, { _id: uuidv4(), ...task }];
+  return [...todos, { _id: uuidv4(), markAsDone: false, ...task }];
 }
 
 // Function to delete a TODO
 export function deleteTodo(todos, id) {
   return todos.filter((todo) => todo._id !== id);
+}
+
+export function markAsDone(todos, id) {
+  return todos.map((todo) =>
+    todo._id === id ? { ...todo, markAsDone: true } : todo
+  );
 }

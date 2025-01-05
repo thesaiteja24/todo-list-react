@@ -1,54 +1,74 @@
-import { useState, useEffect, useCallback } from "react";
-import {
-  editTodo,
-  saveTodo,
-  deleteTodo,
-  markAsDone,
-} from "../utilities/todoUtils";
+import { useState, useCallback } from "react";
+import { todoUtils } from "../utilities/todoUtils";
 import { debounce } from "lodash";
 
 export const useTodos = () => {
-  const [todos, setTodos] = useState(() => {
-    try {
-      const savedTodos = localStorage.getItem("todos");
-      return savedTodos ? JSON.parse(savedTodos) : [];
-    } catch {
-      return [];
-    }
-  });
+  const [todos, setTodos] = useState(todoUtils.loadTodos);
+  const [selectedTodo, setSelectedTodo] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [displayComplete, setDisplayComplete] = useState(false);
 
-  const syncToLocalStorage = debounce((todos) => {
-    try {
-      localStorage.setItem("todos", JSON.stringify(todos));
-    } catch (error) {
-      console.error("Failed to save todos:", error);
-    }
-  }, 300);
+  const syncToLocalStorage = useCallback(
+    debounce((todos) => todoUtils.saveTodosToStorage(todos),300),
+    []
+  );
 
-  useEffect(() => {
-    syncToLocalStorage(todos);
+  const handleEdit = useCallback((index) => {
+    const todo = todoUtils.editTodo(todos, index);
+    setSelectedTodo(todo);
+    setIsEditing(true);
   }, [todos]);
 
-  const handleEdit = useCallback((index) => editTodo(todos, index), [todos]);
-
   const handleSave = useCallback((task) => {
-    setTodos((prevTodos) => saveTodo(prevTodos, task));
-  }, []);
+    setTodos(prevTodos => {
+      const updatedTodos = todoUtils.saveTodo(prevTodos, task);
+      syncToLocalStorage(updatedTodos);
+      return updatedTodos;
+    });
+    setIsEditing(false);
+    setSelectedTodo(null);
+  }, [syncToLocalStorage]);
 
   const handleDelete = useCallback((id) => {
-    setTodos((prevTodos) => deleteTodo(prevTodos, id));
-  }, []);
+    setTodos(prevTodos => {
+      const updatedTodos = todoUtils.deleteTodo(prevTodos, id);
+      syncToLocalStorage(updatedTodos);
+      return updatedTodos;
+    });
+  }, [syncToLocalStorage]);
 
   const handleComplete = useCallback((id) => {
-    setTodos((prevTodos) => markAsDone(prevTodos, id));
+    setTodos(prevTodos => {
+      const updatedTodos = todoUtils.markAsDone(prevTodos, id);
+      syncToLocalStorage(updatedTodos);
+      return updatedTodos;
+    });
+  }, [syncToLocalStorage]);
+
+  const handleCancel = useCallback(() => {
+    setIsEditing(false);
+    setSelectedTodo(null);
+  }, []);
+
+  const viewComplete = useCallback(() => {
+    setDisplayComplete(true);
+  }, []);
+
+  const viewPending = useCallback(() => {
+    setDisplayComplete(false);
   }, []);
 
   return {
     todos,
-    setTodos,
+    selectedTodo,
+    isEditing,
+    displayComplete,
     handleEdit,
     handleSave,
     handleDelete,
     handleComplete,
+    handleCancel,
+    viewComplete,
+    viewPending
   };
 };

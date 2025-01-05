@@ -24,36 +24,51 @@ const tempData = [
   },
 ];
 
-// localStorage.setItem("todos", JSON.stringify(tempData));
+const temp = localStorage.getItem("todos");
 
-// Function to edit a TODO
-export function editTodo(todos, index) {
-  if (index === undefined) {
-    return null; // Add new TODO
-  }
-  return { ...todos[index], index }; // Edit existing TODO
+if (temp === "[]") {
+  localStorage.setItem("todos", JSON.stringify(tempData));
 }
 
-// Function to save a TODO
-export function saveTodo(todos, task) {
-  if (task.index !== undefined) {
-    // Updating existing TODO
-    const updatedTodos = [...todos];
-    updatedTodos[task.index] = { ...task };
-    delete updatedTodos[task.index].index; // Remove temporary index key
-    return updatedTodos;
-  }
-  // Adding new TODO
-  return [...todos, { _id: uuidv4(), markAsDone: false, ...task }];
-}
+export const todoUtils = {
+  editTodo: (todos, index) => {
+    if (index === undefined) return null;
+    return { ...todos[index], index };
+  },
 
-// Function to delete a TODO
-export function deleteTodo(todos, id) {
-  return todos.filter((todo) => todo._id !== id);
-}
+  saveTodo: (todos, task) => {
+    if (task.index !== undefined) {
+      const updatedTodos = [...todos];
+      const todoToSave = { ...task };
+      delete todoToSave.index;
+      updatedTodos[task.index] = todoToSave;
+      return updatedTodos;
+    }
+    return [...todos, { _id: uuidv4(), markAsDone: false, ...task }];
+  },
 
-export function markAsDone(todos, id) {
-  return todos.map((todo) =>
-    todo._id === id ? { ...todo, markAsDone: true } : todo
-  );
-}
+  deleteTodo: (todos, id) => todos.filter((todo) => todo._id !== id),
+
+  markAsDone: (todos, id) =>
+    todos.map((todo) =>
+      todo._id === id ? { ...todo, markAsDone: true } : todo
+    ),
+
+  loadTodos: () => {
+    try {
+      const savedTodos = localStorage.getItem("todos");
+      return savedTodos ? JSON.parse(savedTodos) : [];
+    } catch (error) {
+      console.error("Failed to load todos:", error);
+      return [];
+    }
+  },
+
+  saveTodosToStorage: (todos) => {
+    try {
+      localStorage.setItem("todos", JSON.stringify(todos));
+    } catch (error) {
+      console.error("Failed to save todos:", error);
+    }
+  },
+};

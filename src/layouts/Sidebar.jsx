@@ -27,12 +27,12 @@ export default function Sidebar() {
             className="text-black-700 hover:text-white border border-black-700 hover:bg-black font-medium rounded-lg text-sm px-2 py-2 m-2 w-full text-center"
             onClick={viewPending}
           >
-            Pendinga TODO(s)
+            Pending TODO(s)
           </button>
           <button
             type="button"
             className="text-black-700 hover:text-white border border-black-700 hover:bg-black font-medium rounded-lg text-sm px-2 py-2 m-2 w-full text-center"
-            onClick={ viewComplete}
+            onClick={viewComplete}
           >
             Completed TODO(s)
           </button>

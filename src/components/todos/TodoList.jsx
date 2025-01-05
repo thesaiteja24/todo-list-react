@@ -2,7 +2,7 @@ import React from "react";
 import TodoItem from "./TodoItem";
 import { useTodo } from "../../context/TodoContext";
 
-export default function TodoList({ handleEdit, handleDelete, handleComplete }) {
+export default function TodoList() {
   const { todos, displayComplete } = useTodo();
 
   if (!Array.isArray(todos) || todos.length === 0) {
@@ -16,14 +16,7 @@ export default function TodoList({ handleEdit, handleDelete, handleComplete }) {
           {todos
             .filter((todo) => todo.markAsDone)
             .map((todo, index) => (
-              <TodoItem
-                key={todo._id}
-                todo={todo}
-                index={index}
-                handleEdit={handleEdit}
-                handleDelete={handleDelete}
-                handleComplete={handleComplete}
-              />
+              <TodoItem key={todo._id} todo={todo} index={index} />
             ))}
         </div>
       ) : (
@@ -31,14 +24,7 @@ export default function TodoList({ handleEdit, handleDelete, handleComplete }) {
           {todos
             .filter((todo) => !todo.markAsDone)
             .map((todo, index) => (
-              <TodoItem
-                key={todo._id}
-                todo={todo}
-                index={index}
-                handleEdit={handleEdit}
-                handleDelete={handleDelete}
-                handleComplete={handleComplete}
-              />
+              <TodoItem key={todo._id} todo={todo} index={index} />
             ))}
         </div>
       )}

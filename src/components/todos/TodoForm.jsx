@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { useTodo } from "../../context/TodoContext";
 
-export default function Data({ todo, handleSave, handleCancel }) {
+export default function TodoForm() {
+  const { todo, handleSave, handleCancel } = useTodo();
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [date, setDate] = useState("");

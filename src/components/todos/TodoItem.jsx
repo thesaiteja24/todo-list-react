@@ -1,12 +1,8 @@
 import React from "react";
+import { useTodo } from "../../context/TodoContext";
 
-export default function TodoItem({
-  todo,
-  index,
-  handleEdit,
-  handleDelete,
-  handleComplete,
-}) {
+export default function TodoItem({ todo, index }) {
+  const { handleEdit, handleDelete, handleComplete } = useTodo();
   return (
     <div
       key={todo._id}

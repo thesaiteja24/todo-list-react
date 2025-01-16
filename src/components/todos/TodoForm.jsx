@@ -3,27 +3,29 @@ import { useState } from "react";
 import { useTodo } from "../../context/TodoContext";
 
 export default function TodoForm() {
-  const { todo, handleSave, handleCancel } = useTodo();
+  const { selectedTodo, handleSave, handleCancel } = useTodo();
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [date, setDate] = useState("");
+  const [deadline, setDeadline] = useState("");
 
   useEffect(() => {
-    if (todo) {
-      setTitle(todo.title || "");
-      setDesc(todo.desc || "");
-      setDate(todo.date || "");
+    if (selectedTodo) {
+      setTitle(selectedTodo.title || "");
+      setDesc(selectedTodo.desc || "");
+      setDate(selectedTodo.date || "");
+      setDeadline(selectedTodo.deadline || "");
     }
-  }, [todo]);
+  }, [selectedTodo]);
 
   const saveTodo = () => {
-    if (!todo || !todo.date) {
+    if (!selectedTodo || !selectedTodo.date) {
       // New todo or no existing date
-      const currentDate = new Date().toLocaleDateString("en-GB");
-      handleSave({ ...todo, title, desc, date: currentDate });
+      const currentDate = new Date().toISOString().split('T')[0];
+      handleSave({ ...selectedTodo, title, desc, date: currentDate, deadline });
     } else {
       // Existing todo with date - keep the original date
-      handleSave({ ...todo, title, desc, date: todo.date });
+      handleSave({ ...selectedTodo, title, desc, date: selectedTodo.date, deadline });
     }
   };
   return (
@@ -37,7 +39,7 @@ export default function TodoForm() {
         </label>
         <br />
         <input
-          className="border-2 border-black rounded-lg"
+          className="border-2 border-black rounded-lg p-2"
           type="text"
           id="task-title"
           value={title}
@@ -52,13 +54,27 @@ export default function TodoForm() {
         </label>
         <br />
         <textarea
-          className="border-2 border-black rounded-lg w-full"
+          className="border-2 border-black rounded-lg w-full p-2"
           rows={5}
           type="text"
           id="task-desc"
           value={desc}
           onChange={(e) => {
             setDesc(e.target.value);
+          }}
+        />
+      </div>
+      <div className="m-2 p-2">
+        <label htmlFor="task-desc" className="font-extrabold font-mono text-lg">
+          Deadline:
+        </label>
+        <input
+          type="date"
+          id="deadline"
+          name="deadline"
+          value={deadline}
+          onChange={(e) => {
+            setDeadline(e.target.value);
           }}
         />
       </div>

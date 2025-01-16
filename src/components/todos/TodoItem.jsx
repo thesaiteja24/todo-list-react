@@ -13,6 +13,7 @@ export default function TodoItem({ todo, index }) {
 
       <div className="buttons flex flex-row justify-between">
         <h6 className="date m-1 font-semibold">Created At: {todo.date}</h6>
+        <h6 className="date m-1 font-semibold">Deadline: {todo.deadline}</h6>
         <div>
           {todo.markAsDone ? (
             <span></span>
@@ -32,7 +33,9 @@ export default function TodoItem({ todo, index }) {
             <button
               type="button"
               className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-sm px-5 py-1 text-center me-2 mb-1 mt-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900"
-              onClick={() => handleEdit(index)}
+              onClick={() => {
+                handleEdit(index);
+              }}
             >
               Edit
             </button>

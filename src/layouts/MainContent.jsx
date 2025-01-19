@@ -12,7 +12,7 @@ export default function MainContent() {
 
   return (
     <div
-      className={`main md:w-5/6 md:min-h-screen md:max-h-full p-2 ${
+      className={`main md:w-5/6 md:min-h-screen md:max-h-full p-2 transition-all duration-300 ${
         isDark ? "bg-gray-800" : "bg-white"
       }`}
     >

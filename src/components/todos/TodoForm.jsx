@@ -1,94 +1,119 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTodo } from "../../context/TodoContext";
+import { useTheme } from "../../context/ThemeContext";
 
 export default function TodoForm() {
   const { selectedTodo, handleSave, handleCancel } = useTodo();
+  const { theme } = useTheme(); // Access the current theme
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-  const [date, setDate] = useState("");
   const [deadline, setDeadline] = useState("");
 
   useEffect(() => {
     if (selectedTodo) {
       setTitle(selectedTodo.title || "");
       setDesc(selectedTodo.desc || "");
-      setDate(selectedTodo.date || "");
       setDeadline(selectedTodo.deadline || "");
     }
   }, [selectedTodo]);
 
   const saveTodo = () => {
-    if (!selectedTodo || !selectedTodo.date) {
-      // New todo or no existing date
-      const currentDate = new Date().toISOString().split('T')[0];
-      handleSave({ ...selectedTodo, title, desc, date: currentDate, deadline });
-    } else {
-      // Existing todo with date - keep the original date
-      handleSave({ ...selectedTodo, title, desc, date: selectedTodo.date, deadline });
-    }
+    const currentDate = new Date().toISOString().split("T")[0];
+    handleSave({
+      ...selectedTodo,
+      title,
+      desc,
+      date: selectedTodo?.date || currentDate,
+      deadline,
+    });
   };
+
+  const isDark = theme === "dark";
+
   return (
-    <div className="mx-auto my-4 border-2 border-black p-2 w-11/12 rounded-xl">
-      <div className="m-2 p-2">
+    <div
+      className={`mx-auto my-4 p-4 w-11/12 rounded-xl border-2 transition-all duration-300 ${
+        isDark
+          ? "bg-gray-800 text-white border-gray-600"
+          : "bg-white text-black border-black"
+      }`}
+    >
+      <div className="m-2">
         <label
           htmlFor="task-title"
-          className="font-extrabold font-mono text-lg"
+          className="font-extrabold font-mono text-lg block mb-2"
         >
           Title:
         </label>
-        <br />
         <input
-          className="border-2 border-black rounded-lg p-2"
+          className={`w-full p-2 rounded-lg border-2 ${
+            isDark
+              ? "bg-gray-700 text-white border-gray-500 focus:border-gray-400"
+              : "bg-white text-black border-gray-300 focus:border-black"
+          }`}
           type="text"
           id="task-title"
           value={title}
-          onChange={(e) => {
-            setTitle(e.target.value);
-          }}
+          onChange={(e) => setTitle(e.target.value)}
         />
       </div>
-      <div className="m-2 p-2">
-        <label htmlFor="task-desc" className="font-extrabold font-mono text-lg">
+      <div className="m-2">
+        <label
+          htmlFor="task-desc"
+          className="font-extrabold font-mono text-lg block mb-2"
+        >
           Description:
         </label>
-        <br />
         <textarea
-          className="border-2 border-black rounded-lg w-full p-2"
+          className={`w-full p-2 rounded-lg border-2 ${
+            isDark
+              ? "bg-gray-700 text-white border-gray-500 focus:border-gray-400"
+              : "bg-white text-black border-gray-300 focus:border-black"
+          }`}
           rows={5}
-          type="text"
           id="task-desc"
           value={desc}
-          onChange={(e) => {
-            setDesc(e.target.value);
-          }}
+          onChange={(e) => setDesc(e.target.value)}
         />
       </div>
-      <div className="m-2 p-2">
-        <label htmlFor="task-desc" className="font-extrabold font-mono text-lg">
+      <div className="m-2">
+        <label
+          htmlFor="deadline"
+          className="font-extrabold font-mono text-lg block mb-2"
+        >
           Deadline:
         </label>
         <input
           type="date"
           id="deadline"
-          name="deadline"
+          className={`w-full p-2 rounded-lg border-2 ${
+            isDark
+              ? "bg-gray-700 text-white border-gray-500 focus:border-gray-400"
+              : "bg-white text-black border-gray-300 focus:border-black"
+          }`}
           value={deadline}
-          onChange={(e) => {
-            setDeadline(e.target.value);
-          }}
+          onChange={(e) => setDeadline(e.target.value)}
         />
       </div>
-      <div className="flex flex-row justify-end m-1 p-1">
+      <div className="flex justify-end gap-3 m-2">
         <button
           type="button"
-          className="text-white bg-green-700 hover:bg-green-800  font-medium rounded-full text-sm px-5 py-1 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 "
+          className={`rounded-full text-sm px-5 py-2 font-medium transition-all ${
+            isDark
+              ? "bg-green-600 hover:bg-green-700 text-white"
+              : "bg-green-500 hover:bg-green-600 text-black"
+          }`}
           onClick={saveTodo}
         >
           SAVE
         </button>
         <button
           type="button"
-          className="text-white bg-gray-700 hover:bg-gray-800  font-medium rounded-full text-sm px-5 py-1 text-center me-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 "
+          className={`rounded-full text-sm px-5 py-2 font-medium transition-all ${
+            isDark
+              ? "bg-gray-600 hover:bg-gray-700 text-white"
+              : "bg-gray-500 hover:bg-gray-600 text-black"
+          }`}
           onClick={handleCancel}
         >
           CANCEL

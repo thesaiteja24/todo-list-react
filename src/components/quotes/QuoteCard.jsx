@@ -32,12 +32,12 @@ const QuoteCard = () => {
   }
 
   return (
-    <div className="md:mt-12">
+    <div className="md:mt-8">
       <h1 className="text-center font-bold text-xl mb-2">Quote of the Day</h1>
       {loading ? (
         <p className="text-center">Loading...</p>
       ) : (
-        <div>
+        <div className="p-2">
           <p className="my-8 text-center mx-2">
             <strong className="tangerine-regular text-4xl">
               "{quote.quote}"

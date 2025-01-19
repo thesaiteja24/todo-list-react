@@ -12,7 +12,7 @@ export default function Sidebar() {
 
   return (
     <div
-      className={`sidebar md:w-1/6 md:min-h-screen md:max-h-full p-2 ${
+      className={`sidebar md:w-1/6 md:min-h-screen md:max-h-full p-2 transition-all duration-300 ${
         isDark ? "bg-gray-800 text-white" : "bg-white text-black"
       }`}
     >
@@ -31,7 +31,7 @@ export default function Sidebar() {
             type="button"
             className={`font-medium rounded-lg text-sm px-2 py-2 m-2 w-full text-center ${
               isDark
-                ? "text-white border-gray-600 hover:bg-gray-700"
+                ? "text-white border-gray-600 border-2 hover:bg-gray-700"
                 : "text-black border-black border-2 hover:bg-black hover:text-white"
             }`}
             onClick={() => handleEdit(undefined)}
@@ -42,7 +42,7 @@ export default function Sidebar() {
             type="button"
             className={`font-medium rounded-lg text-sm px-2 py-2 m-2 w-full text-center ${
               isDark
-                ? "text-white border-gray-600 hover:bg-gray-700"
+                ? "text-white border-gray-600 border-2 hover:bg-gray-700"
                 : "text-black border-black border-2 hover:bg-black hover:text-white"
             }`}
             onClick={viewPending}
@@ -53,7 +53,7 @@ export default function Sidebar() {
             type="button"
             className={`font-medium rounded-lg text-sm px-2 py-2 m-2 w-full text-center ${
               isDark
-                ? "text-white border-gray-600 hover:bg-gray-700"
+                ? "text-white border-gray-600 border-2 hover:bg-gray-700"
                 : "text-black border-black border-2 hover:bg-black hover:text-white"
             }`}
             onClick={viewComplete}

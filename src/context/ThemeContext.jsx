@@ -4,11 +4,14 @@ const Theme = createContext();
 
 // Theme Provider
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(
+    localStorage.getItem("todoTheme") || "light"
+  );
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
-    console.log(theme);
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("todoTheme", newTheme);
   };
 
   return (

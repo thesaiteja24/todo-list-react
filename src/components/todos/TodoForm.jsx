@@ -86,7 +86,7 @@ export default function TodoForm() {
         <input
           type="date"
           id="deadline"
-          className={`w-full p-2 rounded-lg border-2 ${
+          className={` p-2 rounded-lg border-2 ${
             isDark
               ? "bg-gray-700 text-white border-gray-500 focus:border-gray-400"
               : "bg-white text-black border-gray-300 focus:border-black"
